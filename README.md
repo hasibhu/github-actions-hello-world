@@ -122,7 +122,7 @@ This is the most important step! Your workflow needs three secrets to connect to
   # -----END RSA PRIVATE KEY-----
   ```
 - Paste the entire key content (including BEGIN and END lines)
-- or cat ~/.ssh/github-action-key.pub >> ~/.ssh/authorized_keys
+- or cat ~/.ssh/publicFileName.pub >> ~/.ssh/authorized_keys
 - Click **"Add secret"**
 
 ## 🔄 How It Works
