@@ -17,19 +17,12 @@ jobs:
       - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
-          # Use a heredoc to preserve formatting exactly
-          cat <<EOF > ~/.ssh/ec2_key
-          ${{ secrets.EC2_SSH_KEY }}
-          EOF
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key
           chmod 600 ~/.ssh/ec2_key
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          # Use -T to prevent ssh-keyscan from hanging if the port is closed
+          ssh-keyscan -T 10 -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+        shell: bash
 
-
-
-
-
-    
-      
       - name: Test EC2 Connectivity
         run: |
           echo "Testing SSH connection to EC2 instance..."
